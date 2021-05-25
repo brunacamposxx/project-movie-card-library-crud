@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import MovieList from './pages/MovieList';
 import MovieDetails from './pages/MovieDetails';
@@ -7,37 +7,36 @@ import NewMovie from './pages/NewMovie';
 import EditMovie from './pages/EditMovie';
 import NotFound from './pages/NotFound';
 
-class App extends React.Component {
-  render() { // manter o render aqui?
-    return (
-      <BrowserRouter>
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
         <div>Movie Card Library CRUD</div>
         <Route
           exact
           path="/"
-          render={ () => <MovieList /> }
+          component={ MovieList }
         />
         <Route
           exact
           path="/movies/:id"
-          render={ () => <MovieDetails /> }
+          component={ MovieDetails }
         />
         <Route
           path="/movies/new"
-          render={ () => <NewMovie /> }
+          component={ NewMovie }
         />
         <Route
           exact
           path="/movies/:id/edit"
-          render={ () => <EditMovie /> }
+          component={ EditMovie }
         />
         <Route
-          path="*"
-          render={ () => <NotFound /> }
+          component={ NotFound }
         />
-      </BrowserRouter>
-    );
-  }
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
