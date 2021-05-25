@@ -1,13 +1,43 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
+import MovieList from './pages/MovieList';
+import MovieDetails from './pages/MovieDetails';
+import NewMovie from './pages/NewMovie';
+import EditMovie from './pages/EditMovie';
+import NotFound from './pages/NotFound';
 
-function App() {
-  return (
-    <Router>
-      <div>Movie Card Library CRUD</div>
-    </Router>
-  );
+class App extends React.Component {
+  render() { // manter o render aqui?
+    return (
+      <BrowserRouter>
+        <div>Movie Card Library CRUD</div>
+        <Route
+          exact
+          path="/"
+          render={ () => <MovieList /> }
+        />
+        <Route
+          exact
+          path="/movies/:id"
+          render={ () => <MovieDetails /> }
+        />
+        <Route
+          path="/movies/new"
+          render={ () => <NewMovie /> }
+        />
+        <Route
+          exact
+          path="/movies/:id/edit"
+          render={ () => <EditMovie /> }
+        />
+        <Route
+          path="*"
+          render={ () => <NotFound /> }
+        />
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
